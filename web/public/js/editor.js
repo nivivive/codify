@@ -1,3 +1,4 @@
+
     editor = new ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
     editor.getSession().setMode("ace/mode/javascript");
@@ -44,7 +45,7 @@
             url: "/savedCode",
             success: function(data) {
                 // console.log(JSON.stringify(data.code));
-                editor.setValue(JSON.stringify(data.code, undefined, 4));
+                editor.setValue(JSON.stringify(data.code, undefined, 4), -1);
             }
         });
     }
