@@ -25,6 +25,40 @@ app.get('/form', function(req,res) {
 	res.render('form');
 });
 
+// render game page
+app.get('/game', function(req, res) {
+    // use game id to pull in untranslated code
+    // and set editor language modes
+});
+
+// render game outcome
+app.get('/game-status', function(req, res) {
+});
+
+// get untranslated code form
+app.get('/translate-form', function(req, res) {
+});
+
+// get translated code
+app.get('/translated', function(req, res) {
+});
+
+// posting form data
+app.post('/request-game', function(req, res) {
+    console.log('req.body.name', req.body['name']);
+});
+
+// posting generated code
+app.post('/verify-code', function(req, res) {
+    // find save way of sending code to server.
+    // use ideone to verify code and output results
+});
+
+// posting untranslated code form data
+app.post('/request-translate', function(req, res) {
+    // push to database broken up chunks of code
+});
+
 // There are many useful environment variables available in process.env.
 // VCAP_APPLICATION contains useful information about a deployed application.
 var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
