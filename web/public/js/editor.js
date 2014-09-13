@@ -10,11 +10,22 @@
     // output.setShowPrintMargin(false);
     // output.getSession().setUseSoftTabs(true);
 
-    htmlout = new ace.edit("htmlout");
-    htmlout.setTheme("ace/theme/twilight");
-    htmlout.getSession().setMode("ace/mode/java");
-    // htmlout.setShowPrintMargin(false);
-    // htmlout.getSession().setUseSoftTabs(true);
+    window.onresize = function () {
+        $('#hints').height($('#editor').height());
+    }
+    window.onload = function () {
+        $('#hints').height($('#editor').height());
+    };
+    verifyCode = function () {
+        var submission = output.getValue();
+        $.ajax({
+            type: "post",
+            code: submission,
+            success: function (data) {
+                // todo: update scores
+            }
+        });
+    }
 
     saveData = function() {
         var currentcode = editor.getValue();

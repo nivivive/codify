@@ -1,5 +1,5 @@
 body {
-    background: #333;
+    background: #fff;
     color: #fff;
     font: 12px/14px 'Consolas', monospace;
 }
@@ -9,7 +9,23 @@ body {
     width: 98%;
     padding: 10px;
     height: 28px;
+    text-align:center;
+    color: #39c0c9;
 }
+
+#footer {
+    height: 83px;
+    background-color: #eee;
+}
+#codeVerifyBtn {
+    background-color: #39c0c9;
+    color:#fff;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    float:right;
+}
+
 .pink {
     color: #f92672;
     font-size: 26px;
@@ -26,17 +42,26 @@ body {
     font-size: 16px;
     color: #FFF;
 }
+
 .docs a, .docs a:link, .docs a:hover, .docs A:visited {
-    color: #FFF;
+    color: #676767;
+}
+#hints {
+    background: #fff;
+    display:block;
+    width: 20%;
+    float:left;
+}
+#edit-window {
 }
 #editor {
     background: #444;
     display: block;
-    width: 49%;
+    width: 39%;
     float: left;
 }
 #output {
-    width: 49%;
+    width: 39%;
     display: visible;
     float: right;
 }

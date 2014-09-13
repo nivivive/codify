@@ -11,14 +11,17 @@ html(lang="en")
       var output;
       var parseCurrent;
       var stopDemHaterz;
-      var saveData;
     #header
       | Codify
       .docs
-        a(href="form") Translate
-    #editor
-    #output
-    #htmlout
+        a(href="form") Code Translations
+    #edit-window
+      #hints
+      #editor
+      #output
+    #footer
+      form(action="",method="GET", onsubmit="verifyCode()")
+      input(type="submit", id="codeVerifyBtn", value="Submit code")
     script(src="http://ace.c9.io/build/src/ace.js", type="text/javascript", charset="utf-8")
     script(src="http://ace.c9.io/build/src/mode-javascript.js", type="text/javascript", charset="utf-8")
     script(src="http://ace.c9.io/build/src/mode-java.js", type="text/javascript", charset="utf-8")
