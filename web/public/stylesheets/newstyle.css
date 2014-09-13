@@ -1,5 +1,5 @@
 body {
-    background: #fff;
+    background: #333;
     color: #fff;
     font: 12px/14px 'Consolas', monospace;
 }
@@ -10,7 +10,7 @@ body {
     padding: 10px;
     height: 28px;
     text-align:center;
-    color: #39c0c9;
+    color: #fff;
 }
 
 #footer {
@@ -49,13 +49,23 @@ body {
 }
 
 .docs a, .docs a:link, .docs a:hover, .docs A:visited {
-    color: #676767;
+    color: #fff;
 }
 #hints {
     background: #fff;
     display:block;
     width: 20%;
     float:left;
+}
+
+#hint-title {
+    background-color: #39c0c9;
+    color:#fff;
+    border: none;
+    padding-top:10px;
+    padding-bottom:10px;
+    text-align:center;
+    font-size: 16px;
 }
 #edit-window {
 }
