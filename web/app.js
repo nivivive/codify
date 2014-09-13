@@ -8,6 +8,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require("fs");
+var ideone = require('./ideone');
 
 // setup middleware
 var app = express();
@@ -101,6 +102,29 @@ app.post('/request-game', function(req, res) {
 app.post('/verify-code', function(req, res) {
     // find save way of sending code to server.
     // use ideone to verify code and output results
+
+    // TODO: populate these with user input and database values
+    var source_language = null;
+    var target_language = null;
+    var source_code = null;
+    var target_code = null;
+    var input = null;
+
+    // run source against target -- actually, shouldn't do this if already cached
+    ideone.createSubmission(source_language, source_code, input, function(data_source) {
+    	var link_source = data_source['link'];
+  		ideone.createSubmission(target_language, target_code, input, function(data_target) {
+  			var link_target = data_target['link'];
+  			// TODO: save both link_source and link_target as an instance of a trial (and cache the result when available)
+  			// and return a status to the user. Direct the user to poll /check-status with the trial id every 3 seconds.
+  		});
+    });
+});
+
+app.post('/check-status', function(req, res) {
+	// TODO: lookup the given trial id from database. if result available, return.
+	// if result not available, call ideone.getSubmissionStatus(...). if available, call ideone.getSubmissionDetails(...) and cache results in database.
+	// if unavailable, return 'check back later'.
 });
 
 // posting untranslated code form data
