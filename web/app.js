@@ -6,14 +6,19 @@
 // and jade as template engine (http://jade-lang.com/).
 
 var express = require('express');
+var bodyParser = require('body-parser');
 
 // setup middleware
 var app = express();
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/views'); //optional since express defaults to CWD/views
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(app.router);
 app.use(express.errorHandler());
 app.use(express.static(__dirname + '/public')); //setup static public directory
-app.set('view engine', 'jade');
-app.set('views', __dirname + '/views'); //optional since express defaults to CWD/views
 
 // render index page
 app.get('/', function(req, res){
@@ -45,7 +50,6 @@ app.get('/translated', function(req, res) {
 
 // posting form data
 app.post('/request-game', function(req, res) {
-    console.log('req.body.name', req.body['name']);
 });
 
 // posting generated code
@@ -57,6 +61,8 @@ app.post('/verify-code', function(req, res) {
 // posting untranslated code form data
 app.post('/request-translate', function(req, res) {
     // push to database broken up chunks of code
+    // can access req.body.project, req.body.fromlang, req.body.tolang
+    console.log("project " + req.body.project);
 });
 
 // There are many useful environment variables available in process.env.

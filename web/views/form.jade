@@ -13,11 +13,11 @@ html.no-js(lang="en")
   body.nl-blurred
     .container.demo-1
       .main.clearfix
-        form#nl-form.nl-form
+        form#nl-form.nl-form(name="form", action="request-translate", method="post")
           | I want to translate
-          input(type="text", value="", placeholder="title of project ", data-subline="For example: <em>Twitter API</em> or <em>Scrabble Code</em>")
+          input(name="project", id="project", type="text", value="", placeholder="title of project ", data-subline="For example: <em>Twitter API</em> or <em>Scrabble Code</em>")
           |  from 
-          select
+          select(name="fromlang", id="fromlang")
             option(value="1", selected="") Java
             option(value="2") Javascript
             option(value="3") Python
@@ -25,7 +25,7 @@ html.no-js(lang="en")
             option(value="2") C
           br
           | into 
-          select
+          select(name="tolang", id="tolang")
             option(value="1", selected="") Python
             option(value="2") Javascript
             option(value="3") Java
