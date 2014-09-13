@@ -1,20 +1,20 @@
     editor = new ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/json");
-    editor.setShowPrintMargin(false);
-    editor.getSession().setUseSoftTabs(true);
+    editor.setTheme("ace/theme/twilight");
+    editor.getSession().setMode("ace/mode/javascript");
+    // editor.setShowPrintMargin(false);
+    // editor.getSession().setUseSoftTabs(true);
 
     output = new ace.edit("output");
-    output.setTheme("ace/theme/monokai");
-    output.getSession().setMode("ace/mode/objectivec");
-    output.setShowPrintMargin(false);
-    output.getSession().setUseSoftTabs(true);
+    output.setTheme("ace/theme/twilight");
+    output.getSession().setMode("ace/mode/java");
+    // output.setShowPrintMargin(false);
+    // output.getSession().setUseSoftTabs(true);
 
     htmlout = new ace.edit("htmlout");
-    htmlout.setTheme("ace/theme/monokai");
-    htmlout.getSession().setMode("ace/mode/html");
-    htmlout.setShowPrintMargin(false);
-    htmlout.getSession().setUseSoftTabs(true);
+    htmlout.setTheme("ace/theme/twilight");
+    htmlout.getSession().setMode("ace/mode/java");
+    // htmlout.setShowPrintMargin(false);
+    // htmlout.getSession().setUseSoftTabs(true);
 
     saveData = function() {
         var currentcode = editor.getValue();

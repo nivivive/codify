@@ -1,32 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<title>Codify</title>
-<link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
-<link href="/stylesheets/newstyle.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<script>
-    var sample;
-    var getViewObject;
-    var editor;
-    var output;
-    var parseCurrent;
-    var stopDemHaterz;
-    var saveData;
-</script>
-<div id="header">
-    Codify 
-</div>
-<div id="editor"></div>
-    
-<div id="output"></div>
-<div id="htmlout"></div>
-
-<script src="http://ace.c9.io/build/src/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="/js/temp.js"></script>
-<script src="/js/editor.js"></script>
-<script src="/js/htmlparser.js"></script>
-<script src="/js/parser.js"></script>
-</body>
-</html>
+doctype html
+html(lang="en")
+  title Codify
+  link(href="http://fonts.googleapis.com/css?family=Questrial", rel="stylesheet", type="text/css")
+  link(href="/stylesheets/newstyle.css", rel="stylesheet", type="text/css")
+  body
+    script
+      var sample;
+      var getViewObject;
+      var editor;
+      var output;
+      var parseCurrent;
+      var stopDemHaterz;
+      var saveData;
+    #header
+      | Codify
+    #editor
+    #output
+    #htmlout
+    script(src="/js/htmlparser.js")
+    script(src="/js/parser.js")
+    script(src="http://ace.c9.io/build/src/ace.js", type="text/javascript", charset="utf-8")
+    script(src="http://ace.c9.io/build/src/mode-javascript.js", type="text/javascript", charset="utf-8")
+    script(src="http://ace.c9.io/build/src/mode-java.js", type="text/javascript", charset="utf-8")
+    script(src="http://ace.c9.io/build/src/mode-python.js", type="text/javascript", charset="utf-8")
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    script(src="/js/temp.js")
+    script(src="/js/editor.js")
