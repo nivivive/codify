@@ -71,6 +71,7 @@ body {
     font-size: 16px;
 }
 #edit-window {
+    margin-bottom:83px;
 }
 #editor {
     background: #444;

@@ -77,10 +77,17 @@ app.get('/form', function(req,res) {
 });
 
 // render game page
-app.get('/game', function(req, res) {
+app.get('/game/:gameId', function(req, res) {
     // use game id to pull in untranslated code
     // and set editor language modes
-    res.render('game');
+    res.render('game', {gameId : req.param("gameId")});
+});
+
+// posting form data
+app.post('/request-game', function(req, res) {
+    // use game id to pull in untranslated code
+    // and set editor language modes
+    res.redirect("/game/" + 1);
 });
 
 // render game outcome
@@ -95,9 +102,6 @@ app.get('/translate-form', function(req, res) {
 app.get('/translated', function(req, res) {
 });
 
-// posting form data
-app.post('/request-game', function(req, res) {
-});
 
 // posting generated code
 app.post('/verify-code', function(req, res) {
