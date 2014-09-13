@@ -19,12 +19,12 @@
     saveData = function() {
         var currentcode = editor.getValue();
         console.log(currentcode);
-        // $.ajax({
-        //     type: "post",
-        //     data: {code: currentcode},
-        //     url: "/savedCode",
-        //     success: true
-        // });
+        $.ajax({
+            type: "post",
+            data: {code: currentcode},
+            url: "/savedCode",
+            success: true
+        });
     }
 
     function getData() {
@@ -32,29 +32,24 @@
             type: "get",
             url: "/savedCode",
             success: function(data) {
-                console.log(JSON.stringify(data.code));
+                // console.log(JSON.stringify(data.code));
                 editor.setValue(JSON.stringify(data.code, undefined, 4));
             }
         });
     }
 
     editor.getSession().on('change', function(e){
-        parseCurrent();
-        parseHTMLCurrent();
+
     });
 
     $(document).ready(function(){
         getData();
         stopDemHaterz();
-        parseCurrent();
-        parseHTMLCurrent();
     });
 
     $(window).resize(stopDemHaterz);
 
     editor.addEventListener('keydown', function(e) {
         if (e.keyCode === 13) {
-            parseCurrent();
-            parseHTMLCurrent();
         }
     }, false);
