@@ -39,6 +39,29 @@
   <link rel="stylesheet" type="text/css" href="css/default.css" />
   <link rel="stylesheet" type="text/css" href="css/component.css" />
 
+  <script src="http://ace.c9.io/build/src/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://ace.c9.io/build/src/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
+   <script src="http://ace.c9.io/build/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+<!-- <link rel="stylesheet" href="http://ace.c9.io/demo/kitchen-sink/styles.css" type="text/css" media="screen" charset="utf-8">
+ -->
+
+ <style type="text/css" media="screen">
+    body {
+        overflow: hidden;
+    }
+    
+    #editor { 
+        margin: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 200;
+        width: 200;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -147,6 +170,23 @@
       <!--code-->text
     </div>
   </div>
+  <div class="row">
+    <pre id="editor">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+}</pre>
+    
+<script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/twilight");
+    editor.getSession().setMode("ace/mode/javascript");
+</script>
+
+  </div>
+</div>
 </div>
   <!--testing games -->
   <!-- js placed at the end of the document so the pages load faster -->
