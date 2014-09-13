@@ -19,12 +19,12 @@
     saveData = function() {
         var currentcode = editor.getValue();
         console.log(currentcode);
-        $.ajax({
-            type: "post",
-            data: {code: currentcode},
-            url: "/savedCode",
-            success: true
-        });
+        // $.ajax({
+        //     type: "post",
+        //     data: {code: currentcode},
+        //     url: "/savedCode",
+        //     success: true
+        // });
     }
 
     function getData() {
