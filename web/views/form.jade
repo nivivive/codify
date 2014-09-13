@@ -7,10 +7,16 @@ html.no-js(lang="en")
     title Natural Language Form
     meta(name="description", content="Natural Language Form with custom text input and drop-down lists")
     meta(name="keywords", content="Natural Language UI, sentence form, text input, contenteditable, html5, css3, jquery")
+    link(href="http://fonts.googleapis.com/css?family=Questrial", rel="stylesheet", type="text/css")
+    link(href="/stylesheets/newstyle.css", rel="stylesheet", type="text/css")
     link(rel="stylesheet", type="text/css", href="/stylesheets/form2/default.css")
     link(rel="stylesheet", type="text/css", href="/stylesheets/form2/component.css")
     script(src="/js/modernizr.custom.js")
-  body.nl-blurred
+  body
+    #header
+      | Codify
+      .docs
+        a(href="form") Translate
     .container.demo-1
       .main.clearfix
         form#nl-form.nl-form(name="form", action="request-translate", method="post")
