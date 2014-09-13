@@ -1,18 +1,18 @@
     editor = new ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/json");
+    editor.getSession().setMode("ace/mode/python");
     editor.setShowPrintMargin(false);
     editor.getSession().setUseSoftTabs(true);
 
     output = new ace.edit("output");
     output.setTheme("ace/theme/monokai");
-    output.getSession().setMode("ace/mode/objectivec");
+    output.getSession().setMode("ace/mode/java");
     output.setShowPrintMargin(false);
     output.getSession().setUseSoftTabs(true);
 
     htmlout = new ace.edit("htmlout");
     htmlout.setTheme("ace/theme/monokai");
-    htmlout.getSession().setMode("ace/mode/html");
+    htmlout.getSession().setMode("ace/mode/java");
     htmlout.setShowPrintMargin(false);
     htmlout.getSession().setUseSoftTabs(true);
 
