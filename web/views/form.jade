@@ -1,0 +1,78 @@
+doctype html
+html.no-js(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Minimal Form Interface
+    meta(name="description", content="Minimal Form Interface: Simplistic, single input view form")
+    meta(name="keywords", content="form, minimal, interface, single input, big form, responsive form, transition")
+    meta(name="author", content="Codrops")
+    link(rel="shortcut icon", href="../favicon.ico")
+    link(rel="stylesheet", type="text/css", href="/stylesheets/form/normalize.css")
+    link(rel="stylesheet", type="text/css", href="/stylesheets/form/demo.css")
+    link(rel="stylesheet", type="text/css", href="/stylesheets/form/component.css")
+    script(src="/js/modernizr.custom.js")
+  body
+    .container
+      section
+        form#theForm.simform(autocomplete="off")
+          .simform-inner
+            ol.questions
+              li
+                span
+                  label(for="q1") What"s your favorite movie?
+                input#q1(type="text", name="q1")
+              li
+                span
+                  label(for="q2") Where do you live?
+                input#q2(type="text", name="q2")
+              li
+                span
+                  label(for="q3") What time do you got to work?
+                input#q3(type="text", name="q3")
+              li
+                span
+                  label(for="q4") How do you like your veggies?
+                input#q4(type="text", name="q4")
+              li
+                span
+                  label(for="q5") What book inspires you?
+                input#q5(type="text", name="q5")
+              li
+                span
+                  label(for="q6") What"s your profession?
+                input#q6(type="text", name="q6")
+            // /questions
+            button.submit(type="submit") Send answers
+            .controls
+              button.next
+              .progress
+              span.number
+                span.number-current
+                span.number-total
+              span.error-message
+            // / controls
+          // /simform-inner
+          span.final-message
+        // /simform
+    // /container
+    script(src="/js/classie.js")
+    script(src="/js/stepsForm.js")
+    script
+      var theForm = document.getElementById( 'theForm' );
+      new stepsForm( theForm, {
+      onSubmit : function( form ) {
+      // hide form
+      classie.addClass( theForm.querySelector( '.simform-inner' ), 'hide' );
+      /*
+      form.submit()
+      or
+      AJAX request (maybe show loading indicator while we don't have an answer..)
+      */
+      // let's just simulate something...
+      var messageEl = theForm.querySelector( '.final-message' );
+      messageEl.innerHTML = 'Thank you! We\\'ll be in touch.';
+      classie.addClass( messageEl, 'show' );
+      }
+      } );
