@@ -13,7 +13,5 @@ function stopDemHaterz() {
             $("#output").hide();
             $("#htmlout").show();
         }
-        parseCurrent();
-        parseHTMLCurrent();
       });
 }
