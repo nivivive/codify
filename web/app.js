@@ -20,6 +20,11 @@ app.get('/', function(req, res){
 	res.render('index');
 });
 
+// render form page
+app.get('/form', function(req,res) {
+	res.render('form');
+});
+
 // There are many useful environment variables available in process.env.
 // VCAP_APPLICATION contains useful information about a deployed application.
 var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
