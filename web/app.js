@@ -36,6 +36,6 @@ var host = (process.env.VCAP_APP_HOST || 'localhost');
 // The port on the DEA for communication with the application:
 var port = (process.env.VCAP_APP_PORT || 3000);
 // Start server
-app.listen(port, host);
+app.listen(port);
 console.log('App started on port ' + port);
 
