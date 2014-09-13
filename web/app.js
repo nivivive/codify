@@ -80,6 +80,7 @@ app.get('/form', function(req,res) {
 app.get('/game', function(req, res) {
     // use game id to pull in untranslated code
     // and set editor language modes
+    res.render('game');
 });
 
 // render game outcome
