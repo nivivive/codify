@@ -14,8 +14,13 @@ body {
 }
 
 #footer {
-    height: 83px;
+    height: 43px;
     background-color: #eee;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
 }
 #codeVerifyBtn {
     background-color: #39c0c9;
