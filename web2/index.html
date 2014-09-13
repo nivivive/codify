@@ -39,6 +39,29 @@
   <link rel="stylesheet" type="text/css" href="css/default.css" />
   <link rel="stylesheet" type="text/css" href="css/component.css" />
 
+  <script src="http://ace.c9.io/build/src/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://ace.c9.io/build/src/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
+   <script src="http://ace.c9.io/build/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+<!-- <link rel="stylesheet" href="http://ace.c9.io/demo/kitchen-sink/styles.css" type="text/css" media="screen" charset="utf-8">
+ -->
+
+ <style type="text/css" media="screen">
+    body {
+        overflow: hidden;
+    }
+    
+    #editor { 
+        margin: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 200;
+        width: 200;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -135,6 +158,7 @@
   </div>
 <!-- /container -->
 
+<<<<<<< HEAD
 <div class="row">
 <div class="col-lg-2">
 <h2>Javascript Syntax</h2>
@@ -144,6 +168,46 @@ test
 </div>
 <div class="col-lg-5">
 test2
+=======
+  <div class="row" style="position:absolute;top:50px;left:50px;">
+    <div style="span2">
+      <h2> Javascript Syntax </h2>
+
+    </div>
+    <div style="span5">
+    <pre id="editor">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+    }
+    </div>
+    <div style="span5">
+    <pre id="editor">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+    }
+    </div>
+  </div>
+  <div class="row">
+    <pre id="editor">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+}</pre>
+    
+<script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/twilight");
+    editor.getSession().setMode("ace/mode/javascript");
+</script>
+
+  </div>
+</div>
 </div>
 </div>
 
