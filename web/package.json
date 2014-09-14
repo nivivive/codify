@@ -4,7 +4,11 @@
 	"description": "A sample nodejs app for Bluemix",
 	"dependencies": {
 		"express": "~3.4.7",
-		"jade": "~1.1.4"
+		"jade": "~1.1.4",
+        "body-parser": "~1.8.1",
+        "connect-flash": "~0.1.1",
+        "mongoose": "~3.8.16",
+        "soap": "~0.5.1"
 	},
 	"x-engines": {
 		"node": "0.10.26"

@@ -43,7 +43,7 @@
             contentType: 'application/json',
             url: '/request-project',
             success: function (data) {
-                window.location = '/project';
+                window.location = '/projects';
             }
         });
     }

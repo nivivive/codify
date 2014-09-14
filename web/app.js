@@ -336,10 +336,11 @@ app.get('/translated/:projectId', function(req, res) {
     Challenge.find({projectId: projectId}, function(err, challenges) {
       console.log(challenges);
       Code.find({challengeId: {$in: challenges.map(function(e) { return e._id; })}}, function(err, codes) {
+          var filteredcodes = codes.filter(function(e) {!e.isOriginal});
           res.render('translatedcode', {
               project: project,
               languages: ideone.getLanguagesSync()['languages'],
-              tLen: codes.length,
+              tLen: filteredcodes.length,
               projectId: projectId
           });
       });
