@@ -72,9 +72,8 @@ body {
 }
 
 #singlehint {
-    background: white;
     display:block;
-    width: 50%;
+    width: 48%;
     float:right;
 }
 

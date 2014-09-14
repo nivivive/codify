@@ -3,6 +3,8 @@ html(lang="en")
   title Codify
   link(href="http://fonts.googleapis.com/css?family=Questrial", rel="stylesheet", type="text/css")
   link(href="/stylesheets/newstyle.css", rel="stylesheet", type="text/css")
+  link(rel="stylesheet", type="text/css", href="/stylesheets/form2/default.css")
+  link(rel="stylesheet", type="text/css", href="/stylesheets/form2/component.css")
   body
     script
       var sample;
@@ -19,6 +21,29 @@ html(lang="en")
       #singleeditor 
       #singlehint
         #singlehint-title Submission Information
+        form#nl-form.nl-form(name="form", action="request-game", method="post")
+          | I want to compete in 
+          select(name="fromlang", id="fromlang")
+            option(value="1", selected="") Java
+            option(value="2") Javascript
+            option(value="3") Python
+            option(value="4") Ruby
+            option(value="2") C
+          br
+          | to 
+          select(name="tolang", id="tolang")
+            option(value="1", selected="") Python
+            option(value="2") Javascript
+            option(value="3") Java
+            option(value="4") Ruby
+            option(value="2") C
+          |  translation.
+          .nl-submit-wrap
+            button.nl-submit(type="submit") Play!
+          .nl-overlay
+    // /container
+    script(src="/js/nlform.js")
+    script(src="/js/form2.js")
     script(src="http://ace.c9.io/build/src/ace.js", type="text/javascript", charset="utf-8")
     script(src="http://ace.c9.io/build/src/mode-javascript.js", type="text/javascript", charset="utf-8")
     script(src="http://ace.c9.io/build/src/mode-java.js", type="text/javascript", charset="utf-8")
