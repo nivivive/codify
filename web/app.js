@@ -71,11 +71,6 @@ app.get('/', function(req, res){
 	res.render('index');
 });
 
-// render form page
-app.get('/form', function(req,res) {
-	res.render('form');
-});
-
 // render game page
 app.get('/game/:gameId', function(req, res) {
     // use game id to pull in untranslated code
@@ -96,8 +91,8 @@ app.get('/game-status', function(req, res) {
 });
 
 // get untranslated code form
-app.get('/translate-form/:projectId', function(req, res) {
-    res.render('translate', {projectId: req.param("projectId")});
+app.get('/translate-form', function(req, res) {
+    res.render('translate');
 });
 
 // get translated code
@@ -137,20 +132,21 @@ app.post('/check-status', function(req, res) {
 // posting creating project form data
 app.post('/request-project', function(req, res) {
     // create project
-    // can access req.body.project, req.body.fromlang, req.body.tolang
-    console.log("project " + req.body.project);
-    res.redirect("/translate-form/" + 1)
-});
-
-// posting untranslated code for new project
-app.post('/request-translate', function(req, res) {
     // push to database broken up chunks of code
-    res.redirect("/project/" + 1);
+    // can access req.body.project, req.body.fromlang, req.body.tolang
+    var name = req.body.project;
+    var challenges = req.body.challenges;
+    var fromLang = req.body.fromLang;
+    var toLang = req.body.toLang;
+    // todo: create db entry. on callback, redirect to the
+    // below w/ appropriate id
+    res.send("success");
 });
 
 // see project page + status
-app.get('/project/:projectId', function(req, res) {
-    res.render("project", {projectId: req.params("projectId")});
+app.get('/project', function(req, res) {
+    // do on callback w/ all of the projects
+    res.render("project");
 });
 
 app.get("/savedCode", function(request, response) {

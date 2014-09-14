@@ -12,6 +12,15 @@ body {
     text-align:center;
     color: #fff;
 }
+#theader {
+    font: 24px/24px 'Questrial';
+    text-transform: uppercase;
+    width: 98%;
+    padding: 10px;
+    height: 48px;
+    text-align:center;
+    color: #fff;
+}
 
 #footer {
     height: 70px;

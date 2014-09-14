@@ -13,14 +13,14 @@ html(lang="en")
       var output;
       var parseCurrent;
       var stopDemHaterz;
-    #header
+    #theader
       | Codify
       .docs
-        a(href="/form") Code Translations
+        a(href="/translate-form") Code Translations
     #edit-window
       #singleeditor 
       #singlehint
-        form#nl-form.nl-form(name="form", action="request-project", method="post")
+        form#nl-form.nl-form(name="form", action="",method="GET", onsubmit="createProject()")
           | I want to translate
           input(name="project", id="project", type="text", value="", placeholder="title of project ", data-subline="For example: <em>Twitter API</em> or <em>Scrabble Code</em>")
           |  from 
@@ -39,7 +39,7 @@ html(lang="en")
             option(value="4") Ruby
             option(value="2") C
           |. The deliminator I plan to use is
-          input(name="project", id="project", type="text", value="", placeholder="XXXX", data-subline="For example: <em>XXXX</em> or <em>5849284</em>")
+          input(name="delim", id="delim", type="text", value="", placeholder="XXXX", data-subline="For example: <em>XXXX</em> or <em>5849284</em>")
           | .
           .nl-submit-wrap
             button.nl-submit(type="submit") Next Step
