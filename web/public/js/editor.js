@@ -36,12 +36,24 @@
         });
     };
     verifyCode = function () {
-        var submission = output.getValue();
+        var data = {};
+        data.sourceCodeId = codeId;
+        data.targetCode = output.getValue();
+        data.sourceLang = fromLang;
+        data.targetLang = toLang;
+        data.challengeId = challengeId;
+        data.gameId = gameId;
         $.ajax({
             type: "post",
-            code: submission,
-            success: function (data) {
-                // todo: update scores
+            data: JSON.stringify(data),
+            url: "/verify-code",
+            contentType: 'application/json',
+            success: function (hasGameEnded) {
+                if (hasGameEnded == true) {
+                    window.location = '/game-status';
+                } else {
+                    window.location.reload();
+                }
             }
         });
     }

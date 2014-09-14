@@ -266,7 +266,10 @@ app.get('/game/:gameId', function(req, res) {
           fromLang: game.fromLang,
           toLang: game.toLang,
           codeId: code._id,
-          challengeId: challengeId });
+          challengeId: challengeId,
+          yourScore: game.scoreOne,
+          theirScore: game.scoreTwo
+        });
       });
     });
     console.log(req.param("gameId") + "game id");
@@ -310,7 +313,15 @@ app.post('/request-game', function(req, res) {
 });
 
 // render game outcome
-app.get('/game-status', function(req, res) {
+app.get('/game-status/:gameId', function(req, res) {
+    var gameId = mongoose.Types.ObjectId(req.param('gameId'));
+    Game.findOne({_id: gameId}, function(err, game) {
+      console.log(game);
+      res.render('newgame', {
+          yourScore: game.scoreOne,
+          theirScore: game.scoreTwo
+      });
+    });
 });
 
 // get untranslated code form
@@ -356,12 +367,48 @@ app.post('/verify-code', function(req, res) {
     // use ideone to verify code and output results
 
     // TODO: populate these with user input and database values
-    var source_language = null;
-    var target_language = null;
-    var source_code = null;
-    var target_code = null;
-    var input = null;
+    var source_language = req.body.sourceLang;
+    var target_language = req.body.targetLang;
+    var source_code;
+    var target_code = req.body.targetCode;
+    var input = "";
 
+    // update challenge
+    console.log("ch id" + req.body.challengeId);
+    Challenge.findOne({_id:req.body.challengeId},
+        function (err, challenge) {
+            if (err) {
+                console.log("ch" + req.body.challengeId);
+                return;
+            }
+            console.log("ch2" + challenge);
+            if (challenge.isCompleted == 0) {
+                challenge.isCompleted = 1;
+                challenge.save();
+            }
+        });
+
+    // update game
+    Game.findOne({_id:req.body.gameId},
+        function (err, game) {
+            if (game.scoreOne == null) {
+                game.ScoreOne = 100;
+                game.onIterOne = 1;
+            } else {
+                game.scoreOne += 100;
+            }
+            game.onIterOne += 1;
+            game.save();
+            if ((game.challengeIds.length-1) <= game.numIterOne) {
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        });
+    // update code
+    Code.findOne({_id:req.body.sourceCodeId},
+        function (err, code) {
+            source_code = code;
     // run source against target -- actually, shouldn't do this if already cached
     ideone.createSubmission(source_language, source_code, input, function(data_source) {
       var link_source = data_source['link'];
@@ -371,6 +418,8 @@ app.post('/verify-code', function(req, res) {
         // and return a status to the user. Direct the user to poll /check-status with the trial id every 3 seconds.
       });
     });
+
+        });
 });
 
 app.post('/check-status', function(req, res) {

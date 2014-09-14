@@ -7,6 +7,7 @@ html(lang="en")
       var toLang = #{toLang};
       var challengeId = '#{challengeId}';
       var codeId = '#{codeId}';
+      var gameId = '#{gameId}';
       var sample;
       var getViewObject;
       var editor;
@@ -59,13 +60,12 @@ html(lang="en")
       #player1
         img(src="/images/player1.png")
       #textscore1
-        | You: 300 pts
+        | You: #{yourScore} pts
       #player2
         img(src="/images/player2.png")
       #textscore2
-        | Player 2: 300 pts
-      form(action="",method="GET", onsubmit="verifyCode()")
-      input(type="submit", id="codeVerifyBtn", value="Submit code")
+        | Player 2: #{theirScore} pts
+      input(type="button", id="codeVerifyBtn", value="Submit code", onclick="verifyCode()")
     script(src="http://ace.c9.io/build/src/ace.js", type="text/javascript", charset="utf-8")
     script(src="http://ace.c9.io/build/src/mode-javascript.js", type="text/javascript", charset="utf-8")
     script(src="http://ace.c9.io/build/src/mode-java.js", type="text/javascript", charset="utf-8")
