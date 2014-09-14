@@ -18,6 +18,38 @@ html(lang="en")
     #edit-window
       #hints
         #hint-title Javascript Syntax
+        .hints-text
+          ul
+            li
+              | Variables: var myName = 'Rebecca';
+            li 
+              | Logging: log(myName);
+            li
+              | Functions: 
+              br
+              | function(a, b) {
+              br 
+              | return a + b; }
+            li
+              | Functions as variables: 
+              br
+              | var addTwoNumbers = function(a, b) {
+              br 
+              | return a + b; };
+            li
+              | Objects:
+              br
+              | var person = {
+              br
+              | firstName : 'Boaz',
+              br
+              | lastName : 'Sender' };
+            li
+              | Arrays:
+              br
+              | var myArray = [ 'a', 'b', 'c' ];
+              br
+              | var firstItem = myArray[ "0" ]; // access the first item
       #editor
       #output
     #footer
