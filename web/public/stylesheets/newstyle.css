@@ -70,6 +70,24 @@ body {
     text-align:center;
     font-size: 16px;
 }
+
+#singlehint {
+    background: white;
+    display:block;
+    width: 50%;
+    float:right;
+}
+
+#singlehint-title {
+    background-color: #39c0c9;
+    color:#fff;
+    border: none;
+    padding-top:10px;
+    padding-bottom:10px;
+    text-align:center;
+    font-size: 16px;
+}
+
 #edit-window {
 }
 #editor {
@@ -78,6 +96,14 @@ body {
     width: 39%;
     float: left;
 }
+
+#singleeditor {
+    background: #444;
+    display: block;
+    width: 50%;
+    float: left;
+}
+
 #output {
     width: 39%;
     display: visible;
