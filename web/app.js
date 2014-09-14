@@ -9,6 +9,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require("fs");
 var ideone = require('./ideone');
+var mongoose = require('mongoose');
 
 // setup middleware
 var app = express();
@@ -22,6 +23,170 @@ app.use(app.router);
 app.use(express.errorHandler());
 app.use(express.bodyParser());
 app.use(express.static(__dirname + '/public')); //setup static public directory
+
+var db;
+// setup db
+mongoose.connect('mongodb://IbmCloud_9lh68nv7_a79tmedj_un7b3bfh:4kqYZGzP7GAM6eA73rX6PJy2aiyfdxL1@ds035760.mongolab.com:35760/IbmCloud_9lh68nv7_a79tmedj',
+  function(err, db_) {
+    if (err) throw err;
+    db = db_;
+    console.log("Database connected");
+  });
+
+// SCHEMAS
+var Project = mongoose.model('Project', {
+  name: String,
+  fromLang: Number,
+  toLang: Number
+});
+
+var Challenge = mongoose.model('Challenge', {
+  projectId: mongoose.Schema.ObjectId,
+  isCompleted: {type: Number, default: 0},
+  stdin: String,
+  fromLang: Number,
+  toLang: Number
+});
+
+var Code = mongoose.model('Code', {
+  text: String,
+  isOriginal: {type: Number, default: 0},
+  challengeId: {type: mongoose.Schema.ObjectId, ref: 'Challenge'},
+  language: Number,
+  isEvaluated: {type: Number, default: 0},
+  stdout: {type: String, default: null},
+  stderr: String,
+  cmpinfo: String,
+  memory: Number,
+  link: String,
+  time: Number
+});
+
+// ADMIN VIEW
+app.get('/admin/projects', function(req, res) {
+  Project.find(function (err, projects) {
+    ideone.getLanguages(function(data) {
+      res.render('admin/projects', {
+        projects: projects,
+        languages: data['languages']
+      });
+    });
+  });
+});
+
+app.post('/admin/projects', function(req, res) {
+  var p = new Project(req.body);
+  p.save(function(err, p) {
+    console.log(p);
+    res.redirect(301, '/admin/projects');
+  });
+});
+
+app.get('/admin/projects/:projectId', function(req, res) {
+  var projectId = mongoose.Types.ObjectId(req.param('projectId'));
+  Project.findOne({_id: projectId}, function(err, project) {
+    Challenge.find({projectId: projectId}, function(err, challenges) {
+      console.log(challenges);
+      Code.find({challengeId: {$in: challenges.map(function(e) { return e._id; })}}, function(err, codes) {
+        res.render('admin/project', {
+          project: project,
+          languages: ideone.getLanguagesSync()['languages'],
+          challenges: challenges,
+          codes: codes
+        });
+      });
+    });
+  });
+});
+
+app.post('/admin/projects/:projectId', function(req, res) {
+  var projectId = mongoose.Types.ObjectId(req.param('projectId'));
+  Project.findOne({_id: projectId}, function(err, project) {
+    req.body['projectId'] = projectId;
+    req.body['fromLang'] = project.fromLang;
+    req.body['toLang'] = project.toLang;
+    var ch = new Challenge(req.body);
+    ch.save(function(err, ch) {
+      console.log(ch);
+      ideone.createSubmission(project.fromLang, req.body.code, ch.stdin, function(data) {
+        var c = new Code({
+          text: req.body.code,
+          isOriginal: 1,
+          challengeId: ch._id,
+          language: project.fromLang,
+          isEvaluated: 0,
+          link: data['link']
+        });
+        c.save(function(err, c) {
+          console.log(c);
+          res.redirect(301, '/admin/projects/' + req.body['projectId']);
+        });
+      });
+    });
+  });
+});
+
+app.get('/admin/challenges', function(req, res) {
+  Challenge.find({}, function(err, challenges) {
+    Code.find({}, function(err, codes) {
+      res.render('admin/challenges', {challenges: challenges, codes: codes});
+    });
+  });
+});
+
+app.post('/admin/challenges', function(req, res) {
+  var challengeId = mongoose.Types.ObjectId(req.body.challengeId);
+  Challenge.findOne({_id: challengeId}, function(err, challenge) {
+    if (err) console.log('[error] probably unmatched challengeId');
+    ideone.createSubmission(challenge.toLang, req.body.code, challenge.stdin, function(data) {
+      var c = new Code({
+        text: req.body.code,
+        isOriginal: 0,
+        challengeId: challengeId,
+        language: challenge.toLang,
+        isEvaluated: 0,
+        link: data['link']
+      });
+      c.save(function(err, c) {
+        console.log(c);
+        res.redirect(301, '/admin/challenges');
+      });
+    });
+  });
+});
+
+app.get('/api/update/:codeId', function(req, res) {
+  var codeId = mongoose.Types.ObjectId(req.param('codeId'));
+  Code.findOne({_id: codeId}, function(err, code) {
+    if (err) console.log("[error] probably unmatched codeId");
+    if (!code.isEvaluated) {
+      ideone.getSubmissionStatus(code.link, function(data) {
+        if (data.status == '0') {
+          ideone.getSubmissionDetails(code.link, function(data) {
+            console.log(data);
+            // update code with stuffs
+            Code.findOneAndUpdate({_id: codeId}, {$set: {
+              isEvaluated: 1,
+              stdout: data.stdout || "",
+              stderr: data.stderr || "",
+              cmpinfo: data.cmpinfo,
+              memory: data.memory,
+              time: data.time
+            }}, {}, function(err, code) {
+              if (err) console.log(err);
+              console.log("aww yiss hi five");
+              res.send(data);
+            });
+          });
+        } else {
+          res.send(data);
+        }
+      });
+    } else {
+      res.send(code);
+    }
+  });
+});
 
 var code;
 
@@ -68,12 +233,12 @@ app.post("/savedCode", function(request, response) {
 
 // render index page
 app.get('/', function(req, res){
-	res.render('index');
+  res.render('index');
 });
 
 // render form page
 app.get('/form', function(req,res) {
-	res.render('form');
+  res.render('form');
 });
 
 // render game page
@@ -117,19 +282,19 @@ app.post('/verify-code', function(req, res) {
 
     // run source against target -- actually, shouldn't do this if already cached
     ideone.createSubmission(source_language, source_code, input, function(data_source) {
-    	var link_source = data_source['link'];
-  		ideone.createSubmission(target_language, target_code, input, function(data_target) {
-  			var link_target = data_target['link'];
-  			// TODO: save both link_source and link_target as an instance of a trial (and cache the result when available)
-  			// and return a status to the user. Direct the user to poll /check-status with the trial id every 3 seconds.
-  		});
+      var link_source = data_source['link'];
+      ideone.createSubmission(target_language, target_code, input, function(data_target) {
+        var link_target = data_target['link'];
+        // TODO: save both link_source and link_target as an instance of a trial (and cache the result when available)
+        // and return a status to the user. Direct the user to poll /check-status with the trial id every 3 seconds.
+      });
     });
 });
 
 app.post('/check-status', function(req, res) {
-	// TODO: lookup the given trial id from database. if result available, return.
-	// if result not available, call ideone.getSubmissionStatus(...). if available, call ideone.getSubmissionDetails(...) and cache results in database.
-	// if unavailable, return 'check back later'.
+  // TODO: lookup the given trial id from database. if result available, return.
+  // if result not available, call ideone.getSubmissionStatus(...). if available, call ideone.getSubmissionDetails(...) and cache results in database.
+  // if unavailable, return 'check back later'.
 });
 
 // posting untranslated code form data

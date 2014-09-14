@@ -1,0 +1,25 @@
+doctype html
+html
+	title Codify admin
+	body
+		a(href="/admin/projects") back to projects
+		h3 ~ project ~
+		p from #{languages[project.fromLang]} to #{languages[project.toLang]}
+		pre #{project}
+		h3 ~ challenges ~
+		pre #{challenges}
+		h3 ~ codes ~
+		pre #{codes}
+
+	h3 Add challenge
+	form(method='POST', action='/admin/projects/'+project._id)
+			label Code
+			br
+			textarea(name='code')
+			br
+			label stdin
+			br
+			textarea(name='stdin')
+			br
+			input(type='submit')
+

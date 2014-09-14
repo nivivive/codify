@@ -1,4 +1,7 @@
 mongodb: 'mongodb://IbmCloud_9lh68nv7_a79tmedj_un7b3bfh:4kqYZGzP7GAM6eA73rX6PJy2aiyfdxL1@ds035760.mongolab.com:35760/IbmCloud_9lh68nv7_a79tmedj'
+
+mongo -u IbmCloud_9lh68nv7_a79tmedj_un7b3bfh -p 4kqYZGzP7GAM6eA73rX6PJy2aiyfdxL1 ds035760.mongolab.com:35760/IbmCloud_9lh68nv7_a79tmedj
+
 schemas:
     - code:
         + isOriginal

@@ -1,0 +1,31 @@
+doctype html
+html
+	title Codify admin
+	body
+		a(href="/admin/challenges") to challenges
+		h3 ~ projects ~
+		pre #{projects}
+		each project in projects
+			a(href="/admin/projects/"+project._id) #{project.name}
+			br
+
+	h3 Add project
+	form(method='POST', action='/admin/projects')
+			label Project name
+			br
+			input(type='text', name='name')
+			br
+			label Project source language
+			br
+			select(name='fromLang')
+				each item, i in languages
+					option(value=i) #{item}
+			br
+			label Project target language
+			br
+			select(name='toLang')
+				each item, i in languages
+					option(value=i) #{item}
+			br
+			input(type='submit')
+

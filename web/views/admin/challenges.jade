@@ -1,0 +1,23 @@
+doctype html
+html
+	title Codify admin
+	body
+		a(href="/admin/projects") to projects
+		h3 ~ challenges ~
+		each challenge in challenges
+			pre #{challenge}
+		h3 ~ codes ~
+		each code in codes
+			pre #{code}
+
+	h3 Add code
+	form(method='POST', action='/admin/challenges')
+			label Challenge id
+			br
+			input(type='text', name='challengeId')
+			br
+			label Code
+			br
+			textarea(name='code')
+			br
+			input(type='submit')
