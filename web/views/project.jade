@@ -8,16 +8,10 @@ html.no-js(lang="en")
         #link
           a(href="/translate-form") Translate
     .container.demo-1
-      div(class="box red")
-        | Twitter API
-      div(class="box aqua")
-        | Twitter API
-      div(class="box purple")
-        | Twitter API
-      div(class="box blue")
-        | Twitter API
-      div(class="box green")
-        | Twitter API
+      -var index = 0
+      each val, key in projects
+        div(class="box col#{index++}")
+          | #{val.name}
     //container
     script(src="/js/nlform.js")
     script(src="/js/form2.js")

@@ -306,17 +306,59 @@ app.post('/request-project', function(req, res) {
     // can access req.body.project, req.body.fromlang, req.body.tolang
     var name = req.body.project;
     var challenges = req.body.challenges;
-    var fromLang = req.body.fromLang;
-    var toLang = req.body.toLang;
-    // todo: create db entry. on callback, redirect to the
-    // below w/ appropriate id
-    res.send("success");
+    var sfromLang = req.body.fromLang;
+    var stoLang = req.body.toLang;
+
+    var convertLang = {
+        'java': 10,
+        'python': 4,
+        'c': 11,
+        'ruby': 17,
+        'javascript': 35
+    }
+    var p = new Project({
+        name: name,
+        fromLang: convertLang[sfromLang],
+        toLang: convertLang[stoLang]
+    });
+
+    p.save(function(err, p) {
+      console.log(p);
+      if (!err) {
+    for (var i=0; i < challenges.length; i++) {
+    var ch = new Challenge({
+        projectId: p._id,
+        toLang: p.toLang,
+        fromLang: p.fromLang
+    });
+    ch.save(function(err, ch) {
+      console.log(ch);
+      ideone.createSubmission(p.fromLang, challenges[i], ch.stdin, function(data) {
+        var c = new Code({
+          text: challenges[i],
+          isOriginal: 1,
+          challengeId: ch._id,
+          language: p.fromLang,
+          isEvaluated: 0,
+          link: data['link']
+        });
+        c.save(function(err, c) {
+          console.log(c);
+        });
+      });
+    });
+    }
+        res.send("success");
+      }
+    });
 });
 
 // see project page + status
-app.get('/project', function(req, res) {
+app.get('/projects', function(req, res) {
     // do on callback w/ all of the projects
-    res.render("project");
+    Project.find({}, function (err, ps) {
+        res.render("project", {projects: ps});
+    });
 });
 
 

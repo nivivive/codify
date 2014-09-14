@@ -20,7 +20,7 @@ html(lang="en")
       #singleeditor 
       #singlehint
         form#nl-form.nl-form(name="form", action="",method="GET", onsubmit="createProject()")
-          | I want to translate
+          | I want to translate 
           input(name="project", id="project", type="text", value="", placeholder="title of project ", data-subline="For example: <em>Twitter API</em> or <em>Scrabble Code</em>")
           |  from 
           select(name="fromlang", id="fromlang")
@@ -29,15 +29,14 @@ html(lang="en")
             option(value="3") Python
             option(value="4") Ruby
             option(value="2") C
-          br
-          | into 
+          |  into 
           select(name="tolang", id="tolang")
             option(value="1", selected="") Python
             option(value="2") Javascript
             option(value="3") Java
             option(value="4") Ruby
             option(value="2") C
-          |. The deliminator I plan to use is
+          |. The deliminator I plan to use is 
           input(name="delim", id="delim", type="text", value="", placeholder="XXXX", data-subline="For example: <em>XXXX</em> or <em>5849284</em>")
           | .
           .nl-submit-wrap
