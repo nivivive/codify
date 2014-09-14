@@ -68,7 +68,8 @@ var Game = mongoose.model('Game', {
     toLang: String,
     scoreOne: Number,
     scoreTwo: Number,
-    onIter: Number
+    onIterOne: Number,
+    onIterTwo: Number
 });
 
 // ADMIN VIEW

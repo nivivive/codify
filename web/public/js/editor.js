@@ -1,13 +1,13 @@
 
     editor = new ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
-    editor.getSession().setMode("ace/mode/javascript");
+    editor.getSession().setMode("ace/mode/java");
     // editor.setShowPrintMargin(false);
     // editor.getSession().setUseSoftTabs(true);
 
     output = new ace.edit("output");
     output.setTheme("ace/theme/twilight");
-    output.getSession().setMode("ace/mode/java");
+    output.getSession().setMode("ace/mode/javascript");
     // output.setShowPrintMargin(false);
     // output.getSession().setUseSoftTabs(true);
 

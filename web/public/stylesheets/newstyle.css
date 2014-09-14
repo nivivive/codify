@@ -159,6 +159,11 @@ a, a:link, a:hover, a:Visited {
     color: white;
 }
 
+.hints-text {
+    font-size: 17px;
+    line-height: 30px;
+}
+
 .challenge-number {
     margin-left: 80%;
     margin-top:  -5%;
@@ -166,8 +171,9 @@ a, a:link, a:hover, a:Visited {
 
 .challenge-text {
     font-size: 12px;
-    margin-top: 15px;
-    margin-left: 3px;
+    margin-top: 20%;
+    margin-left: -50%;
+    text-align: center;
 }
 
 .color0 {
