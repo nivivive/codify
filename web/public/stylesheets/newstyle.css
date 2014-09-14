@@ -4,7 +4,8 @@ body {
     font: 12px/14px 'Consolas', monospace;
 }
 #header {
-    font: 24px/24px 'Questrial';
+    margin-top: 15px;
+    font: 40px/24px 'Fugaz One';
     text-transform: uppercase;
     width: 98%;
     padding: 10px;
@@ -20,6 +21,12 @@ body {
     height: 48px;
     text-align:center;
     color: #fff;
+}
+
+#link {
+    margin-top: 5px;
+    font: 20px 'Lato';
+    margin-left: -350px;
 }
 
 #footer {
@@ -129,4 +136,48 @@ body {
 a, a:link, a:hover, a:Visited {
     color: #4db0e3;
     text-decoration: none;
+}
+
+.box {
+    font-family: "Lato";
+    font-size: 40px;
+    text-align: left;
+    vertical-align: middle;
+    margin: 4px;
+    padding: 4px;
+    clear: none;
+    float: left;
+    height: 2.5em;
+    width: 40%;
+    position: relative;
+    margin-left: 100px;
+    margin-top: 50px;
+    background-color: white;
+    padding-top: 40px;
+    padding-left: 15px;
+    color: white;
+}
+
+.red {
+    background-color: #EC4D4D;
+}
+
+.aqua {
+    background-color: #20CCBB;
+}
+
+.green {
+    background-color: #1DD291;
+}
+
+.purple {
+    background-color: #5954E4;
+}
+
+.yellow {
+   background-color: #FC3;
+}
+
+.blue {
+   background-color: #1D9AD2;
 }
