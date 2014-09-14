@@ -2,19 +2,22 @@ doctype html
 html(lang="en")
   include head2
   body
-    script
+    script.
+      var fromLang = #{fromLang};
+      var toLang = #{toLang};
+      var challengeId = '#{challengeId}';
+      var codeId = '#{codeId}';
       var sample;
       var getViewObject;
       var editor;
       var output;
       var parseCurrent;
-      var stopDemHaterz;
+      var resizeEditors;
     #header
       | Codify
       .docs
         #link
           a(href="/translate-form") Translate
-    #test #{gameId}
     #edit-window
       #hints
         #hint-title Javascript Syntax

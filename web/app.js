@@ -261,16 +261,22 @@ app.get('/game/:gameId', function(req, res) {
       // ASSUMING PLAYER 1
       var challengeId = game.challengeIds[game.onIterOne];
       Code.findOne({isOriginal: 1, challengeId: challengeId}, function(err, code) {
-        console.log(code);
         res.render('game', {
           gameId : req.param("gameId"),
           fromLang: game.fromLang,
           toLang: game.toLang,
-          code: code,
+          codeId: code._id,
           challengeId: challengeId });
       });
     });
     console.log(req.param("gameId") + "game id");
+});
+
+app.get('/code/:codeId', function (req, res) {
+    var codeId = mongoose.Types.ObjectId(req.param('codeId'));
+    Code.findOne({_id:codeId}, function(err, code) {
+        res.send({code:code.text});
+    });
 });
 
 // posting form data

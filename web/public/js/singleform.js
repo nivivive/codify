@@ -65,7 +65,7 @@
             url: "/savedCode",
             success: function(data) {
                 // console.log(JSON.stringify(data.code));
-                singleeditor.setValue(JSON.stringify(data.code, undefined, 4), -1);
+                //singleeditor.setValue(JSON.stringify(data.code, undefined, 4), -1);
             }
         });
     }
@@ -76,10 +76,10 @@
 
     $(document).ready(function(){
         getData();
-        stopDemHaterz();
+        resizeEditors();
     });
 
-    $(window).resize(stopDemHaterz);
+    $(window).resize(resizeEditors);
 
     singleeditor.addEventListener('keydown', function(e) {
         if (e.keyCode === 13) {
