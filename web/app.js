@@ -259,6 +259,9 @@ app.get('/game/:gameId', function(req, res) {
     Game.findOne({_id: gameId}, function(err, game) {
       console.log(game);
       // ASSUMING PLAYER 1
+      if (game.onIterOne >= game.challengeIds.length) {
+        return res.redirect(301, '/game-status/' + gameId);
+      }
       var challengeId = game.challengeIds[game.onIterOne];
       Code.findOne({isOriginal: 1, challengeId: challengeId}, function(err, code) {
         res.render('game', {
@@ -415,7 +418,7 @@ app.post('/verify-code', function(req, res) {
             }
             game.onIterOne += 1;
             game.save();
-            if ((game.challengeIds.length-1) <= game.numIterOne) {
+            if (game.numIterOne < game.challengeIds.length) {
                 res.send(true);
             } else {
                 res.send(false);
@@ -426,8 +429,8 @@ app.post('/verify-code', function(req, res) {
         function (err, code) {
             source_code = code;
     // run source against target -- actually, shouldn't do this if already cached
-    ideone.createSubmission(source_language, source_code, input, function(data_source) {
-      var link_source = data_source['link'];
+    //ideone.createSubmission(source_language, source_code, input, function(data_source) {
+      //var link_source = data_source['link'];
       ideone.createSubmission(target_language, target_code, input, function(data_target) {
         var link_target = data_target['link'];
         // TODO: save both link_source and link_target as an instance of a trial (and cache the result when available)
@@ -435,7 +438,7 @@ app.post('/verify-code', function(req, res) {
       });
     });
 
-        });
+        //});
 });
 
 app.post('/check-status', function(req, res) {
