@@ -10,13 +10,13 @@ html.no-js(lang="en")
     .container.demo-1
       -var index = 0
       each val, key in projects
-        div(class="box color#{index++%6}")
+        a(class="box color#{index++%6}", href="{index}")
           | #{val.name}
           .challenge-number
             | 2/5
             .challenge-text
               | challenges completed
-       
+
     //container
     script(src="/js/nlform.js")
     script(src="/js/form2.js")
