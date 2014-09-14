@@ -143,9 +143,9 @@ app.post('/request-project', function(req, res) {
 });
 
 // posting untranslated code for new project
-app.post('/request-translate/:projectId', function(req, res) {
+app.post('/request-translate', function(req, res) {
     // push to database broken up chunks of code
-    res.redirect("/project/" + req.params("projectId"));
+    res.redirect("/project/" + 1);
 });
 
 // see project page + status

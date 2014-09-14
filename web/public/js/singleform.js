@@ -5,6 +5,12 @@
     singleeditor.setShowPrintMargin(false);
     singleeditor.getSession().setUseSoftTabs(true);
 
+    window.onresize = function () {
+        $('#singlehint').height($('#singleeditor').height());
+    }
+    window.onload = function () {
+        $('#singlehint').height($('#singleeditor').height());
+    };
     verifyCode = function () {
         var submission = output.getValue();
         $.ajax({
