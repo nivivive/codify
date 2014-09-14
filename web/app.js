@@ -350,9 +350,10 @@ app.get('/translated/:projectId', function(req, res) {
         //   translations: [ code objects that represent translations ]
         //  }
         // ]
-        res.render('translations', {
+        res.render('translatedcode', {
           project: project,
           languages: ideone.getLanguagesSync()['languages'],
+          tLen: translations.length,
           translations: JSON.stringify(translations)
         });
       });
