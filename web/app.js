@@ -357,7 +357,7 @@ app.post('/request-project', function(req, res) {
 app.get('/projects', function(req, res) {
     // do on callback w/ all of the projects
     Project.find({}, function (err, ps) {
-        res.render("project", {projects: ps});
+        res.render("projects", {projects: ps});
     });
 });
 

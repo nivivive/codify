@@ -8,9 +8,9 @@ html.no-js(lang="en")
         #link
           a(href="/translate-form") Translate
     .container.demo-1
-      -var index = 0
+      -var index = 1
       each val, key in projects
-        div(class="box col#{index++}")
+        div(class="box color#{index++}")
           | #{val.name}
     //container
     script(src="/js/nlform.js")
