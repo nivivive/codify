@@ -21,6 +21,11 @@ body {
     height: 48px;
     text-align:center;
     color: #fff;
+    margin-top: 15px;
+    font: 40px/24px 'Fugaz One';
+    text-transform: uppercase;
+    width: 98%;
+    padding: 10px;
 }
 
 #link {
