@@ -1,0 +1,57 @@
+doctype html
+html(lang="en")
+  title Codify
+  link(href="http://fonts.googleapis.com/css?family=Lobster|Pacifico|Fugaz+One|Lato", rel="stylesheet", type="text/css")
+  link(href="/stylesheets/newstyle.css", rel="stylesheet", type="text/css")
+  link(rel="stylesheet", type="text/css", href="/stylesheets/form2/default.css")
+  link(rel="stylesheet", type="text/css", href="/stylesheets/form2/component.css")
+  body
+    script
+      var sample;
+      var getViewObject;
+      var editor;
+      var output;
+      var parseCurrent;
+      var stopDemHaterz;
+    #theader
+      | Codify
+      .docs
+        #link
+          a(href="/translate-form") Translate
+    #edit-window
+      #singleeditor 
+      #singlehint
+        form#nl-form.nl-form(name="form", action="",method="GET", onsubmit="createProject()")
+          | I want to translate
+          input(name="project", id="project", type="text", value="", placeholder="title of project ", data-subline="For example: <em>Twitter API</em> or <em>Scrabble Code</em>")
+          |  from 
+          select(name="fromlang", id="fromlang")
+            option(value="1", selected="") Java
+            option(value="2") Javascript
+            option(value="3") Python
+            option(value="4") Ruby
+            option(value="2") C
+          br
+          | into 
+          select(name="tolang", id="tolang")
+            option(value="1", selected="") Python
+            option(value="2") Javascript
+            option(value="3") Java
+            option(value="4") Ruby
+            option(value="2") C
+          |. The deliminator I plan to use is
+          input(name="delim", id="delim", type="text", value="", placeholder="XXXX", data-subline="For example: <em>XXXX</em> or <em>5849284</em>")
+          | .
+          .nl-submit-wrap
+            button.nl-submit(type="submit") Next Step
+          .nl-overlay
+    // /container
+    script(src="/js/nlform.js")
+    script(src="/js/form2.js")
+    script(src="http://ace.c9.io/build/src/ace.js", type="text/javascript", charset="utf-8")
+    script(src="http://ace.c9.io/build/src/mode-javascript.js", type="text/javascript", charset="utf-8")
+    script(src="http://ace.c9.io/build/src/mode-java.js", type="text/javascript", charset="utf-8")
+    script(src="http://ace.c9.io/build/src/mode-python.js", type="text/javascript", charset="utf-8")
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    script(src="/js/temp.js")
+    script(src="/js/singleform.js")

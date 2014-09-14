@@ -245,6 +245,7 @@ app.get('/form', function(req,res) {
 app.get('/game/:gameId', function(req, res) {
     // use game id to pull in untranslated code
     // and set editor language modes
+    console.log(req.param("gameId") + "game id");
     res.render('game', {gameId : req.param("gameId")});
 });
 
@@ -261,6 +262,7 @@ app.get('/game-status', function(req, res) {
 
 // get untranslated code form
 app.get('/translate-form', function(req, res) {
+    res.render('translate');
 });
 
 // get translated code
@@ -297,29 +299,26 @@ app.post('/check-status', function(req, res) {
   // if unavailable, return 'check back later'.
 });
 
-// posting untranslated code form data
-app.post('/request-translate', function(req, res) {
+// posting creating project form data
+app.post('/request-project', function(req, res) {
+    // create project
     // push to database broken up chunks of code
     // can access req.body.project, req.body.fromlang, req.body.tolang
-    console.log("project " + req.body.project);
+    var name = req.body.project;
+    var challenges = req.body.challenges;
+    var fromLang = req.body.fromLang;
+    var toLang = req.body.toLang;
+    // todo: create db entry. on callback, redirect to the
+    // below w/ appropriate id
+    res.send("success");
 });
 
-app.get("/savedCode", function(request, response) {
-    response.send({
-        code: code,
-        success: true
-    });
+// see project page + status
+app.get('/project', function(req, res) {
+    // do on callback w/ all of the projects
+    res.render("project");
 });
 
-app.post("/savedCode", function(request, response) {
-    console.log("Trying to save code:", request.body.code);
-    writeFile("data.txt", request.body.code);
-    code = JSON.parse(request.body.code);
-    response.send({
-        code: code,
-        success:true
-    });
-});
 
 // There are many useful environment variables available in process.env.
 // VCAP_APPLICATION contains useful information about a deployed application.
@@ -341,7 +340,7 @@ function initServer() {
     var defaultCode = "";
     readFile("data.txt", defaultCode, function(err, data) {
         code = JSON.parse(data);
-        console.log("INITIAL CODE", code);
+        //console.log("INITIAL CODE", code);
     });
 }
 
