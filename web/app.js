@@ -329,39 +329,53 @@ app.get('/translate-form', function(req, res) {
     res.render('translate');
 });
 
-// get translated code, example http://localhost:3000/translated/541557678b83ab00006bce2a
+// get translated project, example http://localhost:3000/translated/541557678b83ab00006bce2a
 app.get('/translated/:projectId', function(req, res) {
   var projectId = mongoose.Types.ObjectId(req.param('projectId'));
   Project.findOne({_id: projectId}, function(err, project) {
     Challenge.find({projectId: projectId}, function(err, challenges) {
       console.log(challenges);
       Code.find({challengeId: {$in: challenges.map(function(e) { return e._id; })}}, function(err, codes) {
-        var translations = challenges.map(function(challenge) {
-          return {
-            challenge: challenge,
-            original: codes.filter(function(e) { return e.challengeId + "" == challenge._id + "" && e.isOriginal; }),
-            translations: codes.filter(function(e) { return e.challengeId + "" == challenge._id + "" && !e.isOriginal; })
-          };
-        });
-        // what's in translations:
-        //[ a list of
-        // { challenge: the challenge,
-        //   original: a code object that is the original code, get source code with code.text
-        //   translations: [ code objects that represent translations ]
-        //  }
-        // ]
-        res.render('translatedcode', {
-          project: project,
-          languages: ideone.getLanguagesSync()['languages'],
-          tLen: translations.length,
-          translations: JSON.stringify(translations)
-        });
+          res.render('translatedcode', {
+              project: project,
+              languages: ideone.getLanguagesSync()['languages'],
+              tLen: codes.length,
+              projectId: projectId
+          });
       });
     });
   });
 });
 
+// get translated code for project
+app.get('/translated-code/:projectId', function (req, res) {
+  var projectId = mongoose.Types.ObjectId(req.param('projectId'));
+  Project.findOne({_id: projectId}, function(err, project) {
+    Challenge.find({projectId: projectId}, function(err, challenges) {
+      console.log(challenges);
+      Code.find({challengeId: {$in: challenges.map(function(e) { return e._id; })}}, function(err, codes) {
+        var originaltext = "";
+        var translatedtext = "";
+        for (var i=0; i < challenges.length; i++) {
+            var challenge = challenges[i];
+            var original = codes.filter(function(e) { return e.challengeId + "" == challenge._id + "" && e.isOriginal; });
+            var translated = codes.filter(function(e) { return e.challengeId + "" == challenge._id + "" && !e.isOriginal; });
+            originaltext += "\n/****Challenge " + i + "****/\n";
+            translatedtext += "\n/****Challenge " + i + "****/\n";
 
+            if (original && (original.length != 0)) {
+                originaltext += original[0].text;
+            }
+
+            if (translated && (translated.length != 0)) {
+                translatedtext += translated[0].text;
+            }
+        }
+        res.send({original:originaltext, translated:translatedtext});
+      });
+    });
+  });
+});
 // posting generated code
 app.post('/verify-code', function(req, res) {
     // find save way of sending code to server.

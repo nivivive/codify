@@ -10,7 +10,7 @@ html.no-js(lang="en")
     .container.demo-1
       -var index = 0
       each val, key in projects
-        a(class="box color#{index++%6}", href="{index}")
+        a(class="box color#{index++%6}", href="/translated/#{val._id}")
           | #{val.name}
           .challenge-number
             | 2/5
