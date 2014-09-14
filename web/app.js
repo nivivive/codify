@@ -325,30 +325,34 @@ app.post('/request-project', function(req, res) {
     p.save(function(err, p) {
       console.log(p);
       if (!err) {
-    for (var i=0; i < challenges.length; i++) {
-    var ch = new Challenge({
-        projectId: p._id,
-        toLang: p.toLang,
-        fromLang: p.fromLang
-    });
-    ch.save(function(err, ch) {
-      console.log(ch);
-      ideone.createSubmission(p.fromLang, challenges[i], ch.stdin, function(data) {
-        var c = new Code({
-          text: challenges[i],
-          isOriginal: 1,
-          challengeId: ch._id,
-          language: p.fromLang,
-          isEvaluated: 0,
-          link: data['link']
-        });
-        c.save(function(err, c) {
-          console.log(c);
-        });
-      });
-    });
-    }
-        res.send("success");
+        console.log(challenges);
+        for (var i=0; i < challenges.length; i++) {
+          var ch = new Challenge({
+              projectId: p._id,
+              toLang: p.toLang,
+              fromLang: p.fromLang,
+              stdin: ""
+          });
+          ch.save(function(err, ch) {
+            console.log(ch);
+            console.log("hard code to avoid challenges[i] race");
+            console.log(challenges[0]);
+            ideone.createSubmission(p.fromLang, challenges[0], ch.stdin, function(data) {
+              var c = new Code({
+                text: challenges[0],
+                isOriginal: 1,
+                challengeId: ch._id,
+                language: p.fromLang,
+                isEvaluated: 0,
+                link: data['link']
+              });
+              c.save(function(err, c) {
+                console.log(c);
+                res.send("success");
+              });
+            });
+          });
+        }
       }
     });
 });

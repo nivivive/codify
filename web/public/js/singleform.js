@@ -11,18 +11,22 @@
     window.onload = function () {
         $('#singlehint').height($('#singleeditor').height());
     };
+ 		$('form').on('submit', function(e) {
+ 			e.preventDefault();
+ 		});
     createProject = function () {
         var code = singleeditor.getValue();
         var name = $('#project').val();
         var ntolang = parseInt($('#tolang').val());
         var nfromlang = parseInt($('#fromlang').val());
-        var delim = $('#delim').val();
+        //var delim = $('#delim').val();
         var challenges = [];
 
-        if (code && delim) {
-            console.log("doing stuff w/ code");
-            challenges = code.split(delim);
-        }
+        console.log('code');
+        console.log(code);
+        console.log("doing stuff w/ code");
+        challenges = [code];//code.split(delim);
+        console.log(challenges);
         console.log("herinasd ");
         var fromlang = "java";
         if (nfromlang == 2) {
@@ -52,6 +56,8 @@
         data.fromLang = fromlang;
         data.toLang = tolang;
 
+        console.log('meow');
+        console.log(data);
         $.ajax({
             type: "post",
             data: JSON.stringify(data),
