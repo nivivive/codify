@@ -89,6 +89,7 @@ body {
 }
 
 #edit-window {
+    margin-bottom:83px;
 }
 #editor {
     background: #444;

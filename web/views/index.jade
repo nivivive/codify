@@ -19,7 +19,7 @@ html.no-js(lang="en")
         a(href="form") Translate
     .container.demo-1
       .main.clearfix
-        form#nl-form.nl-form(name="form", action="request-translate", method="post")
+        form#nl-form.nl-form(name="form", action="request-game", method="post")
           | I want to compete in 
           select(name="fromlang", id="fromlang")
             option(value="1", selected="") Java
@@ -37,7 +37,7 @@ html.no-js(lang="en")
             option(value="2") C
           |  translation.
           .nl-submit-wrap
-            button.nl-submit(type="submit" href="game") Play!
+            button.nl-submit(type="submit") Play!
           .nl-overlay
     // /container
     script(src="/js/nlform.js")

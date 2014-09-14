@@ -13,9 +13,11 @@
 
     window.onresize = function () {
         $('#hints').height($('#editor').height());
+        $('#edit-window').height($('#editor').height() + 1);
     }
     window.onload = function () {
         $('#hints').height($('#editor').height());
+        $('#edit-window').height($('#editor').height() + 1);
     };
     verifyCode = function () {
         var submission = output.getValue();
