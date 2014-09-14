@@ -149,22 +149,6 @@ app.get('/project', function(req, res) {
     res.render("project");
 });
 
-app.get("/savedCode", function(request, response) {
-    response.send({
-        code: code,
-        success: true
-    });
-});
-
-app.post("/savedCode", function(request, response) {
-    console.log("Trying to save code:", request.body.code);
-    writeFile("data.txt", request.body.code);
-    code = JSON.parse(request.body.code);
-    response.send({
-        code: code,
-        success:true
-    });
-});
 
 // There are many useful environment variables available in process.env.
 // VCAP_APPLICATION contains useful information about a deployed application.
@@ -186,7 +170,7 @@ function initServer() {
     var defaultCode = "";
     readFile("data.txt", defaultCode, function(err, data) {
         code = JSON.parse(data);
-        console.log("INITIAL CODE", code);
+        //console.log("INITIAL CODE", code);
     });
 }
 
