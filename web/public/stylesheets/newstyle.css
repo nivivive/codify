@@ -4,13 +4,20 @@ body {
     font: 12px/14px 'Consolas', monospace;
 }
 #header {
-    font: 24px/24px 'Questrial';
+    margin-top: 15px;
+    font: 40px/24px 'Fugaz One';
     text-transform: uppercase;
     width: 98%;
     padding: 10px;
     height: 28px;
     text-align:center;
     color: #fff;
+}
+
+#link {
+    margin-top: 5px;
+    font: 20px 'Lato';
+    margin-left: -350px;
 }
 
 #footer {
