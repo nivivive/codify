@@ -68,7 +68,8 @@ var Game = mongoose.model('Game', {
     toLang: String,
     scoreOne: Number,
     scoreTwo: Number,
-    onIter: Number
+    onIterOne: Number,
+    onIterTwo: Number
 });
 
 // ADMIN VIEW
@@ -262,11 +263,27 @@ app.get('/game/:gameId', function(req, res) {
 app.post('/request-game', function(req, res) {
     // use game id to pull in untranslated code
     // and set editor language modes
-    var toLang = req.body.toLang;
-    var fromLang = req.body.fromLang;
+    var sfromLang = req.body.fromlang;
+    var stoLang = req.body.tolang;
+
+    var convertFromLang = {
+        '1': 10, // java
+        '3': 4, // python
+        '5': 11, // c
+        '4': 17, // ruby
+        '2': 35 // javascript
+    }
+
+    var convertToLang = {
+        '3': 10, // java
+        '1': 4, // python
+        '5': 11, // c
+        '4': 17, // ruby
+        '2': 35 // javascript
+    }
 
     Challenge
-    .find({toLang:toLang, fromLang:fromLang})
+    .find({toLang:convertFromLang[stoLang], fromLang:convertToLang[sfromLang]})
     .select({'code'})
     .limit(5)
     .exec(function (err, challenges) {
