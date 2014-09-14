@@ -17,38 +17,17 @@
     createProject = function () {
         var code = singleeditor.getValue();
         var name = $('#project').val();
-        var ntolang = parseInt($('#tolang').val());
-        var nfromlang = parseInt($('#fromlang').val());
+        var tolang = $('#tolang').val();
+        var fromlang = $('#fromlang').val();
         //var delim = $('#delim').val();
-        var challenges = [];
+        var challenges = [code];
 
         console.log('code');
         console.log(code);
         console.log("doing stuff w/ code");
-        challenges = [code];//code.split(delim);
+        //challenges = code.split(delim);
         console.log(challenges);
         console.log("herinasd ");
-        var fromlang = "java";
-        if (nfromlang == 2) {
-            fromlang = "javascript";
-        } else if (nfromlang == 3) {
-            fromlang = "python";
-        } else if (nfromlang == 4) {
-            fromlang = "ruby";
-        } else if (nfromlang == 5) {
-            fromlang = "c";
-        }
-
-        var tolang = "python";
-        if (ntolang == 2) {
-            tolang = "javascript";
-        } else if (ntolang == 3) {
-            tolang = "java";
-        } else if (ntolang == 4) {
-            tolang = "ruby";
-        } else if (ntolang == 5) {
-            tolang = "c";
-        }
 
         var data = {};
         data.project = name;

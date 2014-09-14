@@ -353,20 +353,13 @@ app.post('/request-project', function(req, res) {
     // can access req.body.project, req.body.fromlang, req.body.tolang
     var name = req.body.project;
     var challenges = req.body.challenges;
-    var sfromLang = req.body.fromLang;
-    var stoLang = req.body.toLang;
+    var fromLang = req.body.fromLang;
+    var toLang = req.body.toLang;
 
-    var convertLang = {
-        'java': 10,
-        'python': 4,
-        'c': 11,
-        'ruby': 17,
-        'javascript': 35
-    }
     var p = new Project({
         name: name,
-        fromLang: convertLang[sfromLang],
-        toLang: convertLang[stoLang]
+        fromLang: fromLang,
+        toLang: toLang
     });
 
     p.save(function(err, p) {
