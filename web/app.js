@@ -254,31 +254,42 @@ app.get('/form', function(req,res) {
 app.get('/game/:gameId', function(req, res) {
     // use game id to pull in untranslated code
     // and set editor language modes
+    var gameId = mongoose.Types.ObjectId(req.param('gameId'));
+    Game.findOne({_id: gameId}, function(err, game) {
+      console.log(game);
+      Challenge.find({_id: {$in: game.challengeIds}}, function(err, challenges) {
+        console.log(challenges);
+        Code.find({isOriginal: 1, challengeId: {$in: game.challengeIds}}, function(err, codes) {
+          console.log(codes);
+          res.render('game', {gameId : req.param("gameId")});
+        });
+      });
+    });
     console.log(req.param("gameId") + "game id");
-    res.render('game', {gameId : req.param("gameId")});
 });
 
 // posting form data
 app.post('/request-game', function(req, res) {
     // use game id to pull in untranslated code
     // and set editor language modes
+
     var toLang = req.body.toLang;
     var fromLang = req.body.fromLang;
 
+    console.log(toLang);
+    console.log(fromLang);
     Challenge
     .find({toLang:toLang, fromLang:fromLang})
-    .select({'code'})
     .limit(5)
     .exec(function (err, challenges) {
         if (err) {
             res.redirect('/');
         } else {
-
             var g = new Game({
                 toLang:toLang,
                 fromLang:fromLang,
-                challenges:challenges
-            }
+                challengeIds: challenges.map(function(e) { return e._id; })
+            });
             g.save(function (err, g) {
                 res.redirect("/game/" + g._id);
             });

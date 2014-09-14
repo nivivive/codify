@@ -11,20 +11,20 @@ html.no-js(lang="en")
       .main.clearfix
         form#nl-form.nl-form(name="form", action="request-game", method="post")
           | I want to compete in 
-          select(name="fromlang", id="fromlang")
-            option(value="1", selected="") Java
-            option(value="2") Javascript
-            option(value="3") Python
-            option(value="4") Ruby
-            option(value="2") C
+          select(name="fromLang", id="fromLang")
+            option(value="10", selected="") Java
+            option(value="35") Javascript
+            option(value="4") Python
+            option(value="17") Ruby
+            option(value="11") C
           br
           | to 
-          select(name="tolang", id="tolang")
-            option(value="1", selected="") Python
-            option(value="2") Javascript
-            option(value="3") Java
-            option(value="4") Ruby
-            option(value="2") C
+          select(name="toLang", id="toLang")
+            option(value="4", selected="") Python
+            option(value="35") Javascript
+            option(value="10") Java
+            option(value="17") Ruby
+            option(value="11") C
           |  translation.
           .nl-submit-wrap
             button.nl-submit(type="submit") Play!
