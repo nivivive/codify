@@ -21,6 +21,14 @@ html(lang="en")
       #editor
       #output
     #footer
+      #player1
+        img(src="/images/player1.png")
+      #textscore1
+        | You: 300 pts
+      #player2
+        img(src="/images/player2.png")
+      #textscore2
+        | Player 2: 300 pts
       form(action="",method="GET", onsubmit="verifyCode()")
       input(type="submit", id="codeVerifyBtn", value="Submit code")
     script(src="http://ace.c9.io/build/src/ace.js", type="text/javascript", charset="utf-8")
