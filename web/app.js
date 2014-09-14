@@ -80,6 +80,7 @@ app.get('/form', function(req,res) {
 app.get('/game/:gameId', function(req, res) {
     // use game id to pull in untranslated code
     // and set editor language modes
+    console.log(req.param("gameId") + "game id");
     res.render('game', {gameId : req.param("gameId")});
 });
 
@@ -95,7 +96,8 @@ app.get('/game-status', function(req, res) {
 });
 
 // get untranslated code form
-app.get('/translate-form', function(req, res) {
+app.get('/translate-form/:projectId', function(req, res) {
+    res.render('translate', {projectId: req.param("projectId")});
 });
 
 // get translated code
@@ -132,11 +134,23 @@ app.post('/check-status', function(req, res) {
 	// if unavailable, return 'check back later'.
 });
 
-// posting untranslated code form data
-app.post('/request-translate', function(req, res) {
-    // push to database broken up chunks of code
+// posting creating project form data
+app.post('/request-project', function(req, res) {
+    // create project
     // can access req.body.project, req.body.fromlang, req.body.tolang
     console.log("project " + req.body.project);
+    res.redirect("/translate-form/" + 1)
+});
+
+// posting untranslated code for new project
+app.post('/request-translate/:projectId', function(req, res) {
+    // push to database broken up chunks of code
+    res.redirect("/project/" + req.params("projectId"));
+});
+
+// see project page + status
+app.get('/project/:projectId', function(req, res) {
+    res.render("project", {projectId: req.params("projectId")});
 });
 
 app.get("/savedCode", function(request, response) {
