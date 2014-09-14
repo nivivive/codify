@@ -312,8 +312,35 @@ app.get('/translate-form', function(req, res) {
     res.render('translate');
 });
 
-// get translated code
-app.get('/translated', function(req, res) {
+// get translated code, example http://localhost:3000/translated/541557678b83ab00006bce2a
+app.get('/translated/:projectId', function(req, res) {
+  var projectId = mongoose.Types.ObjectId(req.param('projectId'));
+  Project.findOne({_id: projectId}, function(err, project) {
+    Challenge.find({projectId: projectId}, function(err, challenges) {
+      console.log(challenges);
+      Code.find({challengeId: {$in: challenges.map(function(e) { return e._id; })}}, function(err, codes) {
+        var translations = challenges.map(function(challenge) {
+          return {
+            challenge: challenge,
+            original: codes.filter(function(e) { return e.challengeId + "" == challenge._id + "" && e.isOriginal; }),
+            translations: codes.filter(function(e) { return e.challengeId + "" == challenge._id + "" && !e.isOriginal; })
+          };
+        });
+        // what's in translations:
+        //[ a list of
+        // { challenge: the challenge,
+        //   original: a code object that is the original code, get source code with code.text
+        //   translations: [ code objects that represent translations ]
+        //  }
+        // ]
+        res.render('translations', {
+          project: project,
+          languages: ideone.getLanguagesSync()['languages'],
+          translations: JSON.stringify(translations)
+        });
+      });
+    });
+  });
 });
 
 
@@ -353,20 +380,13 @@ app.post('/request-project', function(req, res) {
     // can access req.body.project, req.body.fromlang, req.body.tolang
     var name = req.body.project;
     var challenges = req.body.challenges;
-    var sfromLang = req.body.fromLang;
-    var stoLang = req.body.toLang;
+    var fromLang = req.body.fromLang;
+    var toLang = req.body.toLang;
 
-    var convertLang = {
-        'java': 10,
-        'python': 4,
-        'c': 11,
-        'ruby': 17,
-        'javascript': 35
-    }
     var p = new Project({
         name: name,
-        fromLang: convertLang[sfromLang],
-        toLang: convertLang[stoLang]
+        fromLang: fromLang,
+        toLang: toLang
     });
 
     p.save(function(err, p) {
