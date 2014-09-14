@@ -66,10 +66,10 @@ var Game = mongoose.model('Game', {
     challengeIds: [{type: mongoose.Schema.ObjectId, ref:'Challenge'}],
     fromLang: String,
     toLang: String,
-    scoreOne: Number,
-    scoreTwo: Number,
-    onIterOne: Number,
-    onIterTwo: Number
+    scoreOne: {type: Number, default: 0},
+    scoreTwo: {type: Number, default: 0},
+    onIterOne: {type: Number, default: 0},
+    onIterTwo: {type: Number, default: 0}
 });
 
 // ADMIN VIEW
@@ -258,12 +258,16 @@ app.get('/game/:gameId', function(req, res) {
     var gameId = mongoose.Types.ObjectId(req.param('gameId'));
     Game.findOne({_id: gameId}, function(err, game) {
       console.log(game);
-      Challenge.find({_id: {$in: game.challengeIds}}, function(err, challenges) {
-        console.log(challenges);
-        Code.find({isOriginal: 1, challengeId: {$in: game.challengeIds}}, function(err, codes) {
-          console.log(codes);
-          res.render('game', {gameId : req.param("gameId")});
-        });
+      // ASSUMING PLAYER 1
+      var challengeId = game.challengeIds[game.onIterOne];
+      Code.findOne({isOriginal: 1, challengeId: challengeId}, function(err, code) {
+        console.log(code);
+        res.render('game', {
+          gameId : req.param("gameId"),
+          fromLang: game.fromLang,
+          toLang: game.toLang,
+          code: code,
+          challengeId: challengeId });
       });
     });
     console.log(req.param("gameId") + "game id");
