@@ -62,6 +62,15 @@ var Code = mongoose.model('Code', {
   time: Number
 });
 
+var Game = mongoose.model('Game', {
+    challengeIds: [{type: mongoose.Schema.ObjectId, ref:'Challenge'}],
+    fromLang: String,
+    toLang: String,
+    scoreOne: Number,
+    scoreTwo: Number,
+    onIter: Number
+});
+
 // ADMIN VIEW
 app.get('/admin/projects', function(req, res) {
   Project.find(function (err, projects) {
@@ -253,7 +262,29 @@ app.get('/game/:gameId', function(req, res) {
 app.post('/request-game', function(req, res) {
     // use game id to pull in untranslated code
     // and set editor language modes
-    res.redirect("/game/" + 1);
+    var toLang = req.body.toLang;
+    var fromLang = req.body.fromLang;
+
+    Challenge
+    .find({toLang:toLang, fromLang:fromLang})
+    .select({'code'})
+    .limit(5)
+    .exec(function (err, challenges) {
+        if (err) {
+            res.redirect('/');
+        } else {
+
+            var g = new Game({
+                toLang:toLang,
+                fromLang:fromLang,
+                challenges:challenges
+            }
+            g.save(function (err, g) {
+                res.redirect("/game/" + g._id);
+            });
+
+        }
+    });
 });
 
 // render game outcome
