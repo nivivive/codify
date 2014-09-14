@@ -1,0 +1,44 @@
+doctype html
+html.no-js(lang="en")
+  include head
+  body
+    #header
+      | Codify
+      .docs
+        #link
+          a(href="/translate-form") Translate
+    .container.demo-1
+      .main.clearfix
+        form#nl-form.nl-form(name="form", action="request-game", method="post")
+          | I want to compete in 
+          select(name="fromLang", id="fromLang")
+            option(value="10", selected="") Java
+            option(value="35") Javascript
+            option(value="4") Python
+            option(value="17") Ruby
+            option(value="11") C
+          |  to 
+          select(name="toLang", id="toLang")
+            option(value="4", selected="") Python
+            option(value="35") Javascript
+            option(value="10") Java
+            option(value="17") Ruby
+            option(value="11") C
+          |  translation.
+          .nl-submit-wrap
+            button.nl-submit(type="submit") Play!
+          .nl-overlay
+      #footer
+        #player1
+          img(src="/images/player1.png")
+        #textscore1
+          | You: 300 pts
+        #player2
+          img(src="/images/player2.png")
+        #textscore2
+          | Player 2: 300 pts
+        form(action="",method="GET", onsubmit="newGame()")
+        input(type="submit", id="codeVerifyBtn", value="New Game")
+    // /container
+    script(src="/js/nlform.js")
+    script(src="/js/form2.js")
