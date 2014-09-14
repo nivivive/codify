@@ -159,26 +159,26 @@ a, a:link, a:hover, a:Visited {
     color: white;
 }
 
-.red {
+.color1 {
     background-color: #EC4D4D;
 }
 
-.aqua {
+.color2 {
     background-color: #20CCBB;
 }
 
-.green {
+.color3 {
     background-color: #1DD291;
 }
 
-.purple {
+.color4 {
     background-color: #5954E4;
 }
 
-.yellow {
+.color5 {
    background-color: #FC3;
 }
 
-.blue {
+.color6 {
    background-color: #1D9AD2;
 }
